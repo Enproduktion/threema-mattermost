@@ -1,0 +1,10 @@
+[Unit]
+Description=Threema Mattermost Daemon
+
+[Service]
+ExecStart=/usr/sbin/uwsgi --ini /home/threema-mattermost/threema-mattermost/threema_mm.ini
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
