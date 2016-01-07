@@ -18,7 +18,8 @@ Threema-Mattermost depends heavily on threema-msgapi-sdk-python. To use group me
 you'll need the currently pending patches by Enproduktion. As long as those patches
 are pending, we recommend installing threema-msgapi-sdk-python by running:
 
-..code:: bash
+.. code:: bash
+
     pip install git+https://github.com/Enproduktion/threema-msgapi-sdk-python.git
 
 To see all other requirements, please lookup the Requirements file in the
@@ -35,7 +36,9 @@ Following are the necessary installation steps for RHEL / Centos 7.x (we just pr
 omit sudo).
 
 Install python and core dependencies:
-..code:: bash
+
+.. code:: bash
+
     yum install epel-release
     yum install python-pip python34 python-virtualenv python-pip python34-devel libsodium git
 
@@ -49,13 +52,16 @@ Install python and core dependencies:
 
 Create user and virtualenv:
 
-..code:: bash
+.. code:: bash
+
     useradd threema-mattermost
     su threema-mattermost
     virtualenv -p python3.4 ~/VirtualEnv/threema-mattermost
 
 Clone repository and install dependencies:
-..code:: bash
+
+.. code:: bash
+
     cd ~
     git clone https://github.com/Enproduktion/threema-mattermost.git
     cd threema-mattermost
@@ -63,7 +69,9 @@ Clone repository and install dependencies:
     pip install -r Requirements
 
 Install and setup letsencrypt:
-..code:: bash
+
+.. code:: bash
+
     # see letencrypt.com
     mkdir /root/letsencrypt
     git clone https://github.com/letsencrypt/letsencrypt /root/letsencrypt/.
@@ -71,7 +79,9 @@ Install and setup letsencrypt:
     ./letsencrypt-auto certonly --standalone -d example.com
 
 Install and setup nginx:
-..code:: bash
+
+.. code:: bash
+
     exit
     yum install nginx
 
@@ -81,7 +91,8 @@ Install and setup nginx:
 
 Install the uwsgi service:
 
-..code:: bash
+.. code:: bash
+
     # You could also use the uwsgi Emporer Daemon. Bare in mind that it's
     # running in Tyrant in default on RHEL systems. It therefore falls back
     # to uwsgi:uwsgi always.
@@ -90,14 +101,22 @@ Install the uwsgi service:
     yum install uwsgi uwsgi-plugin-python3
 
 Install the systemd unit file (start script):
+
+.. code:: bash
+
     cp /home/threema-mattermost/threema-mattermost/install/threema-mattermost.service /etc/systemd/system/
 
 Configure it to your needs:
+
+.. code:: bash
+
     vi /home/threema-mattermost/threema-mattermost/threema_mm/settings.py
     vi /home/threema-mattermost/threema-mattermost/threema_mm/data/users.py
 
 (Optional) Restrict access on firewall level:
+
 .. code:: bash
+
     yum install firewalld
     firewall-cmd --permanent --zone=public --add-service=ssh
     # firewall-cmd  --permanent --zone=public --remove-service=https
@@ -105,6 +124,9 @@ Configure it to your needs:
     firewall-cmd --reload
 
 Run Threema-Mattermost:
+
+.. code:: bash
+
     systemctl start threema-mattermost
     #systemctl stop threema-mattermost
     #systemctl status threema-mattermost
